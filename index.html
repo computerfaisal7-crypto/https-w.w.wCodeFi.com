@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeFi - شركة برمجة احترافية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2D5BFF;
+            --secondary: #00C2FF;
+            --accent: #FF6B35;
+            --dark: #1A1A2E;
+            --light: #F8F9FA;
+            --gray: #6C757D;
+            --success: #28a745;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles - Mobile First */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 12px 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+        
+        .logo h1 {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: none;
+            position: fixed;
+            top: 64px;
+            right: 0;
+            width: 100%;
+            background: white;
+            flex-direction: column;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+        }
+        
+        .nav-links.active {
+            display: flex;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            position: relative;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .nav-links a:last-child {
+            border-bottom: none;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        .header-actions {
+            display: none;
+            gap: 10px;
+        }
+        
+        .header-actions.active {
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 300px;
+            right: 0;
+            width: 100%;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+        
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(45, 91, 255, 0.3);
+        }
+        
+        .btn-google {
+            background: white;
+            color: #757575;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        
+        .btn-google:hover {
+            background: #f5f5f5;
+        }
+        
+        .mobile-menu {
+            display: block;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--primary);
+        }
+        
+        /* Hero Section - Mobile First */
+        .hero {
+            background: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95));
+            padding: 60px 0;
+            position: relative;
+        }
+        
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            text-align: center;
+        }
+        
+        .hero-text {
+            flex: 1;
+        }
+        
+        .hero-text h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            line-height: 1.3;
+            color: var(--dark);
+        }
+        
+        .hero-text h1 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-text p {
+            font-size: 16px;
+            color: var(--gray);
+            margin-bottom: 25px;
+            max-width: 100%;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+        
+        .hero-image {
+            flex: 1;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 60px 0;
+            background-color: white;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-header h2 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            font-size: 16px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            text-align: center;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: white;
+            font-size: 24px;
+        }
+        
+        .service-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+        
+        .service-card p {
+            color: var(--gray);
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .service-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+        
+        /* Projects Section */
+        .projects {
+            padding: 60px 0;
+            background: var(--light);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .project-image {
+            height: 160px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 50px;
+        }
+        
+        .project-info {
+            padding: 20px;
+        }
+        
+        .project-info h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+        
+        .project-category {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: block;
+            font-size: 14px;
+        }
+        
+        .project-info p {
+            color: var(--gray);
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+        
+        .tech-tag {
+            background: var(--light);
+            color: var(--dark);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+        
+        .project-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 60px 0;
+            background: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            text-align: center;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 35px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .feature-card h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+        
+        .feature-card p {
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        /* Team Section */
+        .team {
+            padding: 60px 0;
+            background-color: var(--light);
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .team-image {
+            height: 180px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 60px;
+        }
+        
+        .team-info {
+            padding: 20px;
+        }
+        
+        .team-info h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .team-info .position {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .team-info p {
+            color: var(--gray);
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .team-social a {
+            width: 32px;
+            height: 32px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .team-social a:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Stats Section */
+        .stats {
+            background: var(--gradient);
+            padding: 50px 0;
+            color: white;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        
+        .stat-text {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+            padding: 30px 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .modal-header h2 {
+            color: var(--dark);
+            margin-bottom: 8px;
+            font-size: 22px;
+        }
+        
+        .modal-header p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 18px 0;
+            position: relative;
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        .divider:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 40%;
+            height: 1px;
+            background: #ddd;
+        }
+        
+        .divider:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 40%;
+            height: 1px;
+            background: #ddd;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 60px 0;
+            background-color: white;
+        }
+        
+        .contact-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-form {
+            flex: 1;
+        }
+        
+        .contact-card {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .contact-card h3 {
+            margin-bottom: 12px;
+            color: var(--dark);
+            font-size: 18px;
+        }
+        
+        .contact-card p {
+            color: var(--gray);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        /* Registration Section */
+        .registration {
+            padding: 60px 0;
+            background-color: var(--light);
+        }
+        
+        .registration-content {
+            display: flex;
+            flex-direction: column;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+        
+        .registration-image {
+            display: none;
+        }
+        
+        .registration-form {
+            flex: 1;
+            padding: 30px 25px;
+        }
+        
+        .registration-form h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+        
+        .registration-form p {
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 14px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(45, 91, 255, 0.1);
+        }
+        
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .success-message {
+            background-color: var(--success);
+            color: white;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+            font-size: 14px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: white;
+            position: relative;
+            padding-bottom: 8px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 35px;
+            height: 2px;
+            background: var(--gradient);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-right: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+        
+        .social-links a:hover {
+            background: var(--gradient);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 13px;
+        }
+        
+        /* Tablet Styles */
+        @media (min-width: 768px) {
+            .container {
+                width: 85%;
+            }
+            
+            .hero {
+                padding: 80px 0;
+            }
+            
+            .hero-text h1 {
+                font-size: 36px;
+            }
+            
+            .hero-buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+            
+            .services-grid,
+            .projects-grid,
+            .features-grid,
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .form-row {
+                flex-direction: row;
+                gap: 15px;
+            }
+        }
+        
+        /* Desktop Styles */
+        @media (min-width: 992px) {
+            .mobile-menu {
+                display: none;
+            }
+            
+            .nav-links {
+                display: flex;
+                position: static;
+                flex-direction: row;
+                background: transparent;
+                padding: 0;
+                box-shadow: none;
+                width: auto;
+                gap: 25px;
+            }
+            
+            .nav-links a {
+                padding: 0;
+                border-bottom: none;
+            }
+            
+            .nav-links a.active:after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                right: 0;
+                width: 100%;
+                height: 2px;
+                background: var(--gradient);
+            }
+            
+            .header-actions {
+                display: flex;
+                position: static;
+                flex-direction: row;
+                background: transparent;
+                padding: 0;
+                box-shadow: none;
+                width: auto;
+            }
+            
+            .header-actions.active {
+                display: flex;
+            }
+            
+            .hero-content {
+                flex-direction: row;
+                text-align: right;
+            }
+            
+            .hero-text h1 {
+                font-size: 42px;
+            }
+            
+            .hero-text p {
+                max-width: 90%;
+            }
+            
+            .hero-buttons {
+                justify-content: flex-start;
+            }
+            
+            .services-grid,
+            .projects-grid,
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .contact-content {
+                flex-direction: row;
+            }
+            
+            .registration-content {
+                flex-direction: row;
+            }
+            
+            .registration-image {
+                display: flex;
+                flex: 1;
+                background: var(--gradient);
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 120px;
+                padding: 40px;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        /* Large Desktop */
+        @media (min-width: 1200px) {
+            .services-grid,
+            .features-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h1>CodeFi</h1>
+                </div>
+                <div class="nav-links">
+                    <a href="#home" class="active">الرئيسية</a>
+                    <a href="#services">خدماتنا</a>
+                    <a href="#projects">مشاريعنا</a>
+                    <a href="#features">ميزاتنا</a>
+                    <a href="#team">فريقنا</a>
+                    <a href="#contact">اتصل بنا</a>
+                </div>
+                <div class="header-actions">
+                    <a href="#" class="btn btn-outline" id="loginBtn">تسجيل الدخول</a>
+                    <a href="#registration" class="btn btn-primary">انضم إلينا</a>
+                </div>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2>تسجيل الدخول</h2>
+                <p>سجل الدخول إلى حسابك في CodeFi</p>
+            </div>
+            <button class="btn btn-google" id="googleLogin">
+                <i class="fab fa-google"></i>
+                تسجيل الدخول باستخدام Gmail
+            </button>
+            <div class="divider">أو</div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">البريد الإلكتروني</label>
+                    <input type="email" id="loginEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">كلمة المرور</label>
+                    <input type="password" id="loginPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">تسجيل الدخول</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>حلول برمجية <span>مبتكرة</span> لمستقبل رقمي</h1>
+                    <p>نحن في CodeFi نقدم خدمات برمجة متكاملة تلبي احتياجات عملك في العصر الرقمي، من تطوير مواقع الويب إلى تطبيقات الجوال والحلول البرمجية المتقدمة.</p>
+                    <div class="hero-buttons">
+                        <a href="#services" class="btn btn-primary">استكشف خدماتنا</a>
+                        <a href="#projects" class="btn btn-outline">شاهد مشاريعنا</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div style="background: var(--gradient); color: white; padding: 30px; border-radius: 10px; text-align: center;">
+                        <i class="fas fa-laptop-code" style="font-size: 80px; margin-bottom: 15px;"></i>
+                        <h3 style="font-size: 20px;">حلول برمجية مبتكرة</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>خدماتنا المتكاملة</h2>
+                <p>نقدم مجموعة واسعة من الخدمات البرمجية التي تلبي جميع احتياجاتك التقنية</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>تطوير الويب</h3>
+                    <p>نقوم بتصميم وتطوير مواقع ويب متجاوبة وسريعة تلبي احتياجات عملك وتعزز وجودك الرقمي.</p>
+                    <a href="#" class="service-link">
+                        اكتشف المزيد
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>تطبيقات الجوال</h3>
+                    <p>نطور تطبيقات جوال مبتكرة لأنظمة iOS و Android مع واجهات مستخدم جذابة وسهلة الاستخدام.</p>
+                    <a href="#" class="service-link">
+                        اكتشف المزيد
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>حلول برمجية مخصصة</h3>
+                    <p>نصمم حلول برمجية مخصصة تلبي احتياجات عملك الفريدة وتعزز كفاءة عملياتك.</p>
+                    <a href="#" class="service-link">
+                        اكتشف المزيد
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2>مشاريعنا</h2>
+                <p>اكتشف أبرز المشاريع التي نفخر بها في CodeFi</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>منصة تجارة إلكترونية</h3>
+                        <span class="project-category">تطوير ويب</span>
+                        <p>منصة تجارة إلكترونية متكاملة مع نظام دفع إلكتروني وإدارة مخزون متقدمة.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            عرض المشروع
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>تطبيق توصيل طعام</h3>
+                        <span class="project-category">تطبيقات جوال</span>
+                        <p>تطبيق توصيل طعام بميزات متقدمة مثل التتبع المباشر وتقييم المطاعم.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Google Maps</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            عرض المشروع
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>نظام إدارة الشركات</h3>
+                        <span class="project-category">حلول برمجية</span>
+                        <p>نظام متكامل لإدارة الموارد البشرية والمشاريع والمهام في الشركات.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">MySQL</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            عرض المشروع
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>ميزاتنا الجديدة</h2>
+                <p>اكتشف أحدث الميزات والتقنيات التي نقدمها لعملائنا</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>الذكاء الاصطناعي</h3>
+                    <p>دمج تقنيات الذكاء الاصطناعي في حلولنا البرمجية لتحسين الكفاءة واتخاذ القرارات.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>الأمان المتقدم</h3>
+                    <p>نظام أمان متطور لحماية بياناتك ومشاريعك من التهديدات الإلكترونية.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>الحلول السحابية</h3>
+                    <p>توفير حلول سحابية متكاملة لتخزين وإدارة بياناتك بأعلى معايير الأمان.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team" id="team">
+        <div class="container">
+            <div class="section-header">
+                <h2>فريق عملنا</h2>
+                <p>تعرف على الفريق المتميز الذي يعمل خلف نجاح CodeFi</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-image">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="team-info">
+                        <h3>فيصل بكيل</h3>
+                        <div class="position">المدير التنفيذي</div>
+                        <p>خبرة 10 سنوات في إدارة المشاريع البرمجية والتطوير التقني.</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-image">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="team-info">
+                        <h3>فيصل بكيل</h3>
+                        <div class="position">مدير التصميم</div>
+                        <p>متخصصة في تجربة المستخدم وتصميم الواجهات التفاعلية.</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-behance"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-image">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="team-info">
+                        <h3>فيصل بكيل</h3>
+                        <div class="position">كبير المطورين</div>
+                        <p>خبير في تطوير الويب وتقنيات البرمجة المتقدمة.</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-text">مشروع مكتمل</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-text">عميل راضٍ</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-text">سنوات من الخبرة</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5</div>
+                    <div class="stat-text">دعم فني</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>اتصل بنا</h2>
+                <p>نحن هنا للإجابة على جميع استفساراتك</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <h3>معلومات التواصل</h3>
+                        <p><i class="fas fa-map-marker-alt" style="margin-left: 8px;"></i> اليمن,عدن</p>
+                        <p><i class="fas fa-phone" style="margin-left: 8px;"></i> 775665845</p>
+                        <p><i class="fas fa-envelope" style="margin-left: 8px;"></i> codefi77@gmail.com</p>
+                    </div>
+                    <div class="contact-card">
+                        <h3>ساعات العمل</h3>
+                        <p>الأحد - الخميس: 8 ص - 5 م</p>
+                        <p>الجمعة - السبت: مغلق</p>
+                    </div>
+                    <div class="banner" style="padding: 15px; background-color: var(--light); border-radius: 10px; margin-top: 15px;">
+                        <p style="margin-bottom: 10px; text-align: center; font-size: 14px;">
+                            : تم تجهيز المنصة من قبل
+                        </p>
+                        <a href="https://wa.me/+967775665845" target="_blank" rel="noopener noreferrer"
+                            style="color: var(--primary); text-decoration: none; font-weight: bold; cursor: pointer; display: block; text-align: center; font-size: 14px;">
+                            💻 مكتب: CodeFi
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contactName">الاسم الكامل</label>
+                                <input type="text" id="contactName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail">البريد الإلكتروني</label>
+                                <input type="email" id="contactEmail" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactSubject">الموضوع</label>
+                            <input type="text" id="contactSubject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactMessage">الرسالة</label>
+                            <textarea id="contactMessage" class="form-control" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">إرسال الرسالة</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section class="registration" id="registration">
+        <div class="container">
+            <div class="registration-content">
+                <div class="registration-image">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <div class="registration-form">
+                    <h2>انضم إلى CodeFi</h2>
+                    <p>سجل معنا اليوم واحصل على آخر التحديثات والعروض الحصرية</p>
+                    <form id="registerForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">الاسم الأول</label>
+                                <input type="text" id="firstName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">الاسم الأخير</label>
+                                <input type="text" id="lastName" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">البريد الإلكتروني</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">رقم الهاتف</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">كلمة المرور</label>
+                            <input type="password" id="password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">تأكيد كلمة المرور</label>
+                            <input type="password" id="confirmPassword" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">إنشاء حساب</button>
+                    </form>
+                    <div class="success-message" id="successMessage">
+                        تم إنشاء حسابك بنجاح! سيتم التواصل معك قريباً.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>CodeFi</h3>
+                    <p style="color: #ccc; margin-bottom: 20px; font-size: 14px;">شركة برمجة رائدة تقدم حلولاً تقنية مبتكرة تساعد الشركات على النمو في العصر الرقمي.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#services">خدماتنا</a></li>
+                        <li><a href="#projects">مشاريعنا</a></li>
+                        <li><a href="#features">ميزاتنا</a></li>
+                        <li><a href="#team">فريقنا</a></li>
+                        <li><a href="#contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>خدماتنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">تطوير الويب</a></li>
+                        <li><a href="#">تطبيقات الجوال</a></li>
+                        <li><a href="#">التجارة الإلكترونية</a></li>
+                        <li><a href="#">حلول البرمجيات</a></li>
+                        <li><a href="#">استشارات تقنية</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>اتصل بنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-map-marker-alt" style="margin-left: 8px;"></i> اليمن,عدن</a></li>
+                        <li><a href="#"><i class="fas fa-phone" style="margin-left: 8px;"></i> 775665845</a></li>
+                        <li><a href="#"><i class="fas fa-envelope" style="margin-left: 8px;"></i> codefi77@gmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة &copy; 2025 CodeFi</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            const headerActions = document.querySelector('.header-actions');
+            
+            navLinks.classList.toggle('active');
+            headerActions.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 991) {
+                    document.querySelector('.nav-links').classList.remove('active');
+                    document.querySelector('.header-actions').classList.remove('active');
+                }
+            });
+        });
+
+        // Login Modal
+        const loginModal = document.getElementById('loginModal');
+        const loginBtn = document.getElementById('loginBtn');
+        const closeModal = document.querySelector('.close-modal');
+        const googleLogin = document.getElementById('googleLogin');
+
+        loginBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            loginModal.style.display = 'flex';
+        });
+
+        closeModal.addEventListener('click', function() {
+            loginModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', function(e) {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+        });
+
+        // Gmail Login
+        googleLogin.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const userEmail = prompt("الرجاء إدخال بريدك الإلكتروني:");
+            
+            if (userEmail) {
+                // محاكاة إرسال البريد الإلكتروني
+                alert(`تم إرسال طلب تسجيل الدخول إلى codefi77@gmail.com\n\nسيتم التواصل معك قريباً لتأكيد الحساب.`);
+                
+                // إغلاق النافذة
+                loginModal.style.display = 'none';
+            }
+        });
+
+        // Form Submission
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Simple validation
+            if (password !== confirmPassword) {
+                alert('كلمات المرور غير متطابقة!');
+                return;
+            }
+            
+            // Create user object
+            const user = {
+                firstName,
+                lastName,
+                email,
+                phone,
+                password,
+                registrationDate: new Date().toISOString()
+            };
+            
+            // Save to localStorage
+            let users = JSON.parse(localStorage.getItem('codefiUsers')) || [];
+            users.push(user);
+            localStorage.setItem('codefiUsers', JSON.stringify(users));
+            
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Reset form
+            document.getElementById('registerForm').reset();
+            
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 5000);
+        });
+
+        // Contact Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const subject = document.getElementById('contactSubject').value;
+            const message = document.getElementById('contactMessage').value;
+            
+            // محاكاة إرسال البريد الإلكتروني
+            alert(`شكراً ${name} على تواصلك معنا!\n\nسيتم الرد على استفسارك في أقرب وقت ممكن.`);
+            
+            // Reset form
+            document.getElementById('contactForm').reset();
+        });
+
+        // Add active class to nav links on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
